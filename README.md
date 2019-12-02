@@ -29,10 +29,11 @@ The dataset used for trainig is provide by the Leap Motion on the Kaggle URL. Th
 Dataset URL: https://www.kaggle.com/gti-upm/leapgestrecog/data
 
 Usage:
-Download the folder or Git clone. 
-[optional] Download the dataset if you want to re-train by following the instructions above and extract it.
+1. Download the folder or Git clone. 
+2. [optional] Download the dataset if you want to re-train by following the instructions above and extract it.
+
 The main.py contains three methods given below
 
-testLimeExplanations() 
-trainDataset() 
-main() #this method is executed first
+1. testLimeExplanations() 
+2. trainDataset() 
+3. main() #this method is executed first
