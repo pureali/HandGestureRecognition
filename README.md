@@ -2,7 +2,7 @@
 
 Explainable-HandGestureRecognition with LIME using Keras in Python
 
-This project uses LIME to interpret a Hand Gesture Recognition Model. This project is motivated by the european conference on machine learning summer school (EPSS 19 Wurzburg, Germany 11th-16 Sep 19) and is part of the coursework by the University of Wurzburg, Germany. The project consists of two phases
+This project uses LIME to interpret a Hand Gesture Recognition Model. This project is part of the coursework by the University of Wurzburg, Germany and the EPSS19 Summer School. The project consists of two phases
 
 1. Training of the CNN based deep learning model and saving the model as h5 extension file.
 2. Using the LIME API to interpret the inference of the model for a set of images.
@@ -28,10 +28,10 @@ The dataset used for trainig is provide by the Leap Motion on the Kaggle URL. Th
 Dataset URL: https://www.kaggle.com/gti-upm/leapgestrecog/data
 
 Usage:
-Download the folder or Git clone. Then download the dataset by following the instructions above and extract it.
+Download the folder or Git clone. 
+[optional] Download the dataset if you want to re-train by following the instructions above and extract it.
 The main.py contains three methods given below
 
 testLimeExplanations() 
 trainDataset() 
 main() #this method is executed first
-
