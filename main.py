@@ -11,8 +11,8 @@ def trainDataset():
 
 def main():
     print("Running Main Method")
-    trainDataset()
-    #testLimeExplanations()
+    #trainDataset()
+    testLimeExplanations()
    
 if __name__ == "__main__":
     main()
