@@ -15,13 +15,14 @@ We plot the following results using Matplotlib.
 The project contains the following tree hierarchy.
 
 HandGestureRecognition (root folder)
-----dataset (folder for placing the dataset)
----------test (folder inside dataset consisting of the test images)
-----figs (used for saving graphs)
--handrecognition_model.h5 (saved hand gesture recognition model)
--main.py (main.py for training the model and testing the LIME explanations)
--tester.py (Testor class which uses LIME for explanations)
--trainer.py (Trainer class for training the model)
+1. ----dataset (folder for placing the dataset)
+2. ---------test (folder inside dataset consisting of the test images)
+3. ----figs (used for saving graphs)
+4. -handrecognition_model.h5 (saved hand gesture recognition model)
+5. -main.py (main.py for training the model and testing the LIME explanations)
+6. -tester.py (Testor class which uses LIME for explanations)
+7. -trainer.py (Trainer class for training the model)
+
 
 Dataset
 The dataset used for trainig is provide by the Leap Motion on the Kaggle URL. This project directory only contains the empty folder dataset, please download the data from the kaggle website and extract it into the dataset folder.
