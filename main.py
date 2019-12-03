@@ -3,7 +3,8 @@ from trainer import Trainer
 from tester import LimeTester
 def testLimeExplanations():
     limeTester=LimeTester()
-    limeTester.runLimeExplanations()
+    #limeTester.runLimeExplanations()
+    limeTester.plotExplainarAndInferenceTime()
 
 def trainDataset():
     hgt=Trainer()

@@ -1,4 +1,5 @@
 import os
+import math
 import sys
 import time
 import keras
@@ -24,6 +25,88 @@ class LimeTester():
   #timex and timey are used for saving the x-axis and y-axis values for the Lime explanations time
   self.timex=[]
   self.timey=[]
+ def plotExplainarAndInferenceTime(self):
+     predictionTime=0
+     explainerTime=0
+     count=0
+     explainer = lime_image.LimeImageExplainer()
+     pX=[]
+     pY=[]
+     eX=[]
+     eY=[]
+     
+     
+     files=[]
+     for path in os.listdir(self.testImagePath):
+      files.append(path)
+      files.sort()
+     for path in files:
+         count=count+1
+         print("Path:"+path)
+         im=cv2.imread(self.testImagePath+"/"+path)
+         
+         im = cv2.resize(im, (320, 120))
+         imo=im
+         im=np.expand_dims(im,axis=0)
+         t1=time.time()
+         predict=self.model.predict(im)
+         outLabel=(predict.argmax(axis=-1))[0]
+         pX.append(outLabel)
+         eX.append(outLabel)
+         print("Output:"+str(outLabel))
+         
+         ptime=time.time()-t1
+         pY.append(ptime)
+         print("Prediction Time:"+str(ptime))
+         predictionTime=predictionTime+ptime
+         
+
+         #now calculate the time for lime explainer
+         t1=time.time()
+         explanation = explainer.explain_instance(imo, self.model.predict, top_labels=5, hide_color=0, num_samples=1000)
+         temp, mask = explanation.get_image_and_mask(outLabel,positive_only=True, num_features=3, hide_rest=False)
+         etime=time.time()-t1
+         eY.append(etime)
+         print("Explainer Time:"+str(etime))
+         explainerTime=explainerTime+etime
+        #  if (count==1):
+        #   break
+         
+
+
+         
+     fig, ax1=plt.subplots()
+     
+     print ("pX:"+str(pX)+", pY:"+str(pY))
+     print ("eX:"+str(eX)+", pY:"+str(eY))
+     ax1.set_ylabel("Model inference Time (s)")
+     ax1.set_xlabel("Class Labels")    
+     ax1.plot(pX,pY,color='tab:red', marker="o",label="Model Inference")
+     ax1.tick_params(axis='y', labelcolor='tab:red')
+     ax1.legend(loc=1,bbox_to_anchor=(1,0.57))
+
+     ax2=ax1.twinx()
+     ax2.set_ylabel("LIME Explainer Time (s)")
+     ax2.plot(pX,eY,color='tab:blue', marker="s",label="LIME Explainer  ")
+     ax2.tick_params(axis='y', labelcolor='tab:blue')
+     ax2.legend(loc=1,bbox_to_anchor=(1,0.50))
+     fig.tight_layout()
+     
+
+     averagePredictionTime=(predictionTime/count)+1
+     averageExplainerTime=(explainerTime/count)+1
+     #averagePredictionTime=math.log10(averagePredictionTime)
+     #averageExplainerTime=math.log10(averageExplainerTime)
+     
+     
+    #  print("Average Prediction Time:"+str(averagePredictionTime)+" Average Explainer Time:"+str(averageExplainerTime))
+    #  plt.bar(["Average Prediction Time", "Average LIME explainer Time"], [averagePredictionTime,averageExplainerTime])
+     
+    #  plt.ylabel("Time (s)")
+     plt.savefig("figs/prediction-explainer-time.png")
+
+
+
  def runLimeExplanations(self):
   count=0
   for testFile in os.listdir(self.testImagePath):
